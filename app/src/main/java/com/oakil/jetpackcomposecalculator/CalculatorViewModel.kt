@@ -28,15 +28,12 @@ class CalculatorViewModel : ViewModel(){
 
             if (btn == "C") {
                 if (it.isNotEmpty()) {
-                    // If the last character is an operator, allow it to remain for further editing
+                    _equationText.value = it.substring(0, it.length - 1)
+
                     if (it.last().isOperator()) {
                         return  // Don't remove operator if it's at the end
                     }
 
-                    // Remove the last character and update the equation
-                    _equationText.value = it.substring(0, it.length - 1)
-
-                    // Recalculate the result if necessary (only if the equation is complete)
                     if (isValidEquation(_equationText.value.toString())) {
                         _resultText.value = calculateResult(_equationText.value.toString())
                     }else{
